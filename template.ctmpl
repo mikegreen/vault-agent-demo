@@ -1,5 +1,5 @@
 {{/* Read the secret at the path below */}}
-{{ with secret "kvV2/legacy_app_creds_01" }}
+{{ with secret "kvAgentDemo/legacy_app_creds_01" }}
 Username: {{ .Data.data.username }}
 Password: {{ .Data.data.password }}
 Create TS: {{ .Data.metadata.created_time }}

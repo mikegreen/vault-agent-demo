@@ -33,3 +33,5 @@ pidfile
 .DS_Store
 sink-file
 secretid
+render.txt
+roleid
