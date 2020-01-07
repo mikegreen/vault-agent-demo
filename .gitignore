@@ -31,3 +31,5 @@ vault
 pidfile
 *.bak
 .DS_Store
+sink-file
+secretid
