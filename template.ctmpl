@@ -1,8 +1,9 @@
 {{/* Read the secret at the path below */}}
 {{ with secret "kvAgentDemo/legacy_app_creds_01" }}
-Username: {{ .Data.data.username }}
-Password: {{ .Data.data.password }}
+ Username: {{ .Data.data.username }}
+ Password: {{ .Data.data.password }}
 Create TS: {{ .Data.metadata.created_time }}
-Version: {{ .Data.metadata.version }}
-{{ .Data }}
+  Version: {{ .Data.metadata.version }}
+
+All raw metadata: {{ .Data }}
 {{ end }}

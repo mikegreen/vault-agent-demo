@@ -1,6 +1,6 @@
 # Vault Agent demo
 
-Purpose: This repo was created to demo how Vault Agent can read a simple KV secret, populate a config sinple file, and maybe more as we get into it. 
+Purpose: This repo was created to demo how Vault Agent can read a simple KV secret, populate a config simple file, and maybe more as we get into it. 
 
 Future versions of this might include:
 * Inject variables into a complex config file, not just one we create
