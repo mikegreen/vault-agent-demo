@@ -10,8 +10,11 @@
 # to the process. 
 pid_file = "./pidfile"
 
-#
-exit_after_auth = true
+# https://www.vaultproject.io/docs/agent/index.html#exit_after_auth
+# If set to true, the agent will exit with code 0 after a single successful
+# auth, where success means that a token was retrieved and all sinks
+# successfully wrote it
+exit_after_auth = false
 
 # Define the connection to the Vault cluster
 vault {
@@ -45,14 +48,13 @@ auto_auth {
 
 # If cache and listener is not used, a sink file must be created. 
 # However, it is not recommended to leave this file for security concerns. 
-#
-#  sink {
-#    type = "file"
-
-#    config = {
-#      path = "sink_file.txt"
-#    }
-#  }
+# Comment out the sink stanza below to not generate the file
+  sink {
+    type = "file"
+    config = {
+      path = "sink_file.txt"
+    }
+  }
 
 }
 
