@@ -70,6 +70,8 @@ Future versions of this might include:
     $ vault read auth/approle/role/agentdemo/role-id
 	role_id    ffcfd009-86e0-5c11-e85f-lee78310ee0cd
 	```
+	Make a new file `roleid` (in repo folder) that contains only the role_id UUID returned above
+
 1. Create a secret ID for the role
 	```
 	$ vault write -f auth/approle/role/agentdemo/secret-id
@@ -78,12 +80,14 @@ Future versions of this might include:
 	secret_id             62a9b134-cd6d-cc77-909e-0a6a4c0289e6
 	secret_id_accessor    3a1670da-4811-b9ca-acba-bafdf6c7925b
 	```
+	Make a new file `secretid` (in repo folder) that contains only the secret_id UUID returned above
+
 	* Note, the secret ID that is read as part of the auth_auth config stanza,
 	```
 	    config = {
-      role_id_file_path = "roleid"
-      secret_id_file_path = "secretid"
-      remove_secret_id_file_after_reading = false
+      		role_id_file_path = "roleid"
+      		secret_id_file_path = "secretid"
+      		remove_secret_id_file_after_reading = false
     ```
     defaults to removing the file at the secred_id_file_path (remove_secret_id_file_after_reading = true). 
     In this example we have set this to false to keep the secret ID in the filesystem. In the real world, 
