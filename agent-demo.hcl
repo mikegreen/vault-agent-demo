@@ -46,15 +46,34 @@ auto_auth {
     }
   }
 
-# If cache and listener is not used, a sink file must be created. 
-# However, it is not recommended to leave this file for security concerns. 
-# Comment out the sink stanza below to not generate the file
-  sink {
-    type = "file"
-    config = {
-      path = "sink_file.txt"
+  # If cache and listener is not used, a sink file must be created. 
+  # However, it is not recommended to leave this file for security concerns. 
+  # Comment out the sink stanza below to not generate the file
+    sink {
+      type = "file"
+      wrap_ttl = "30m"
+      config = {
+        path = "sink_file_wrapped_1.txt"
+      }
     }
-  }
+
+    sink {
+      type = "file"
+      config = {
+        path = "sink_file_unwrapped_2.txt"
+      }
+    }
+
+    # Encrypted Token example
+    # TODO Need to improve documentation on Curve 25591 encryption and how this workflow works
+    # sink {
+    #  type = "file"
+    #  dh_type = "curve25519"
+    #  dh_path = "test_ed25591_key.pub"
+    #  config = {
+    #    path = "sink_file_encrypted_1.txt"
+    #  }
+    # }    
 
 }
 
@@ -68,6 +87,12 @@ listener "unix" {
 
 cache {
   use_auto_auth_token = true
+}
+
+# Caching testing below
+listener "tcp" {
+  address = "127.0.0.1:8200"
+  tls_disable = true
 }
 
 # template stanza documentation is the same as Consul template, see
