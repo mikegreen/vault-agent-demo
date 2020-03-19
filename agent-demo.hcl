@@ -102,6 +102,10 @@ template {
   source      = "template.ctmpl"
   destination = "render.txt"
   backup      = true
+  # Exit with an error when accessing a struct or map field/key that does not
+  # exist. The default behavior will print "<no value>" when accessing a field
+  # that does not exist. It is highly recommended you set this to "true" when
+  # retrieving secrets from Vault.
   error_on_missing_key = false
 
 # Wait is included here for syntax only, since we don't have a
