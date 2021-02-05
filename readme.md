@@ -93,7 +93,7 @@ Future versions of this might include:
     In this example we have set this to false to keep the secret ID in the filesystem. In the real world, 
     this should be a consideration and a security concern for both keeping this file and permissions of it.
 
-1. Review the [template.ctmpl](../blob/master/template.ctmpl) file. This file defines the output that will be rendered. 
+1. Review the [template.ctmpl](../master/template.ctmpl) file. This file defines the output that will be rendered. 
     * [Template syntax](https://www.vaultproject.io/docs/agent/template/index.html#configuration) for further use cases
     * Vault agent template follows [Consul template](https://github.com/hashicorp/consul-template) syntax
     * Any metadata can be used - for example, see KV2 metadata here:
