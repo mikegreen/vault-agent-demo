@@ -99,6 +99,8 @@ Future versions of this might include:
     * Any metadata can be used - for example, see KV2 metadata here:
     https://www.vaultproject.io/docs/secrets/kv/kv-v2.html#key-metadata
 
+### Running the demo
+
 1.  Run vault agent
 
     ```
@@ -146,5 +148,50 @@ Future versions of this might include:
 1. If your use case does not need a token to interact with Vault, now would be a good time to remove the `sink` stanza from the agent-demo.hcl file.
    Note: A sink file or listener must be enabled with auto_auth. This requirement will soon be removed, see https://github.com/hashicorp/vault/issues/7988 and https://github.com/hashicorp/vault/tree/template-sinkless
 
+### Use Vault to generate a PKI certificate and save to a file
 
+1. Setup [PKI secrets engine](https://www.vaultproject.io/docs/secrets/pki)
+   ```language
+   $ vault secrets enable -path=pki-agent pki
+   Success! Enabled the pki secrets engine at: pki-agent/
+   
+   $ vault write pki-agent/root/generate/internal common_name=my.hashicorpdemo.com ttl=24h
+	Key              Value
+	---              -----
+	certificate      -----BEGIN CERTIFICATE-----
+	MIIDUj...
+	-----END CERTIFICATE-----
+	expiration       1622748662
+	issuing_ca       -----BEGIN CERTIFICATE-----
+	MIIDUjC...
+	-----END CERTIFICATE-----
+	serial_number    3b:8a:13:04:8c:ab:74:ee:65:3c:f6:66:51:52:ed:fa:65:60:c1:6e
+
+	$ vault write pki-agent/roles/dev-dot-com allowed_domains=hashicorpdemo.com allow_subdomains=true
+	Success! Data written to: pki-agent/roles/dev-dot-com
+
+	$ vault write pki-agent/issue/dev-dot-com common_name=dev.hashicorpdemo.com ttl=1h
+	Key                 Value
+	---                 -----
+	certificate         -----BEGIN CERTIFICATE-----
+	MIIDYjC...
+	OlaS++YZ
+	-----END CERTIFICATE-----
+	expiration          1622666066
+	issuing_ca          -----BEGIN CERTIFICATE-----
+	MIIDUjC...
+	-----END CERTIFICATE-----
+	private_key         -----BEGIN RSA PRIVATE KEY-----
+	MIIEpQI...
+	-----END RSA PRIVATE KEY-----
+	private_key_type    rsa
+	serial_number       35:da:a9:1c:ba:35:bb:56:2c:b7:df:d7:6e:11:4b:b8:f9:c7:6a:ce
+
+   ```
+
+1. Run vault agent `$ vault agent --config=agent-demo-pki.hcl`
+
+1. You'll see in the log output a file was created: `[INFO] (runner) rendered "template-pki.ctmpl" => "render-pki.txt"`
+
+1. And the contents of the file should look like this example: [render-pki.example](./render-pki.example)
 

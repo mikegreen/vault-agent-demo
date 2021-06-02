@@ -2,8 +2,6 @@
 // meaning you can mix #, // and 
 /* block comments
    like this */
-# 
-# 
 
 # This is the path to store a PID file which will contain the process ID of the
 # Vault agent process. This is useful if you plan to send custom signals
@@ -16,22 +14,14 @@ pid_file = "./pidfile"
 # successfully wrote it
 exit_after_auth = false
 
-# Define the connection to the Vault cluster
 vault {
 
-  # define the connection to Vault
-  # Setting here will override VAULT_ADDR env var
+  # See https://www.vaultproject.io/docs/agent#vault-stanza
   # address = "http://ec2-123-16-50-115.us-east-2.compute.amazonaws.com:8200"
 
+  # See https://www.vaultproject.io/docs/agent#retry-stanza
   retry {
-    # Note that Vault Agent does *NOT* support the retry block from Consul template,
-    # which are found here 
-    # https://github.com/hashicorp/consul-template#templating-language  
-    # see https://github.com/hashicorp/vault/issues/6001
-    #    enabled = false
-    #    attempts = 2
-    #    backoff = "5s"
-    #    max_backoff = "60s"
+    num_retries = 5
   }
 }
 
@@ -48,7 +38,10 @@ auto_auth {
 
   # If cache and listener is not used, a sink file must be created. 
   # However, it is not recommended to leave this file for security concerns. 
-  # Comment out the sink stanza below to not generate the file
+  # Comment out the sink stanzas below to not generate the file
+  
+  # Create a text file containing a wrapped token
+  # To use this token, unwrap with `$ VAULT_TOKEN=s.lTjQQHZWknFMkO190qZka5C8 vault unwrap`
     sink {
       type = "file"
       wrap_ttl = "30m"
@@ -57,6 +50,7 @@ auto_auth {
       }
     }
 
+  # Create a text file containing a plain-text token
     sink {
       type = "file"
       config = {
@@ -64,32 +58,21 @@ auto_auth {
       }
     }
 
-    # Encrypted Token example
-    # TODO Need to improve documentation on Curve 25591 encryption and how this workflow works
-    # sink {
-    #  type = "file"
-    #  dh_type = "curve25519"
-    #  dh_path = "test_ed25591_key.pub"
-    #  config = {
-    #    path = "sink_file_encrypted_1.txt"
-    #  }
-    # }    
-
 }
 
 # this is a workaround to not write a sink file containing 
 # a token file that could be a security risk
 #
-listener "unix" {
-         address = "foo.txt"
-         tls_disable = true
-}
+# listener "unix" {
+#         address = "foo.txt"
+#         tls_disable = true
+#}
 
 cache {
   use_auto_auth_token = true
 }
 
-# Caching testing below
+# Create a local listener, this allows apps to use Vault locally without auth'ing on their own
 listener "tcp" {
   address = "127.0.0.1:8200"
   tls_disable = true
