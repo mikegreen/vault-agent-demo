@@ -1,6 +1,6 @@
 # Vault Agent demo
 
-Purpose: This repo was created to demo how Vault Agent can read a simple KV secret, populate a config simple file, and maybe more as we get into it. 
+Purpose: This repo was created to demo how [Vault Agent](https://www.vaultproject.io/docs/agent) can read a simple KV secret, populate a config simple file, and maybe more as we get into it. 
 If you are looking for a more verbose tutorial, the HashiCorp Learn site has one here https://learn.hashicorp.com/vault/identity-access-management/agent-templates
 
 
