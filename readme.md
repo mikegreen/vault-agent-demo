@@ -195,3 +195,5 @@ Future versions of this might include:
 
 1. And the contents of the file should look like this example: [render-pki.example](./render-pki.example)
 
+1. It is possible to have the template put the certificate, private and public keys in separate files. Possibility for improvement of this repo. 
+
