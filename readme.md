@@ -156,36 +156,36 @@ Future versions of this might include:
    Success! Enabled the pki secrets engine at: pki-agent/
    
    $ vault write pki-agent/root/generate/internal common_name=my.hashicorpdemo.com ttl=24h
-Key              Value
----              -----
-certificate      -----BEGIN CERTIFICATE-----
-MIIDUj...
------END CERTIFICATE-----
-expiration       1622748662
-issuing_ca       -----BEGIN CERTIFICATE-----
-MIIDUjC...
------END CERTIFICATE-----
-serial_number    3b:8a:13:04:8c:ab:74:ee:65:3c:f6:66:51:52:ed:fa:65:60:c1:6e
+	Key              Value
+	---              -----
+	certificate      -----BEGIN CERTIFICATE-----
+	MIIDUj...
+	-----END CERTIFICATE-----
+	expiration       1622748662
+	issuing_ca       -----BEGIN CERTIFICATE-----
+	MIIDUjC...
+	-----END CERTIFICATE-----
+	serial_number    3b:8a:13:04:8c:ab:74:ee:65:3c:f6:66:51:52:ed:fa:65:60:c1:6e
 
-$ vault write pki-agent/roles/dev-dot-com allowed_domains=hashicorpdemo.com allow_subdomains=true
-Success! Data written to: pki-agent/roles/dev-dot-com
+	$ vault write pki-agent/roles/dev-dot-com allowed_domains=hashicorpdemo.com allow_subdomains=true
+	Success! Data written to: pki-agent/roles/dev-dot-com
 
-$ vault write pki-agent/issue/dev-dot-com common_name=dev.hashicorpdemo.com ttl=1h
-Key                 Value
----                 -----
-certificate         -----BEGIN CERTIFICATE-----
-MIIDYjC...
-OlaS++YZ
------END CERTIFICATE-----
-expiration          1622666066
-issuing_ca          -----BEGIN CERTIFICATE-----
-MIIDUjC...
------END CERTIFICATE-----
-private_key         -----BEGIN RSA PRIVATE KEY-----
-MIIEpQI...
------END RSA PRIVATE KEY-----
-private_key_type    rsa
-serial_number       35:da:a9:1c:ba:35:bb:56:2c:b7:df:d7:6e:11:4b:b8:f9:c7:6a:ce
+	$ vault write pki-agent/issue/dev-dot-com common_name=dev.hashicorpdemo.com ttl=1h
+	Key                 Value
+	---                 -----
+	certificate         -----BEGIN CERTIFICATE-----
+	MIIDYjC...
+	OlaS++YZ
+	-----END CERTIFICATE-----
+	expiration          1622666066
+	issuing_ca          -----BEGIN CERTIFICATE-----
+	MIIDUjC...
+	-----END CERTIFICATE-----
+	private_key         -----BEGIN RSA PRIVATE KEY-----
+	MIIEpQI...
+	-----END RSA PRIVATE KEY-----
+	private_key_type    rsa
+	serial_number       35:da:a9:1c:ba:35:bb:56:2c:b7:df:d7:6e:11:4b:b8:f9:c7:6a:ce
 
    ```
 
