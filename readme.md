@@ -99,7 +99,7 @@ Future versions of this might include:
     * Any metadata can be used - for example, see KV2 metadata here:
     https://www.vaultproject.io/docs/secrets/kv/kv-v2.html#key-metadata
 
-### Running the demo
+## Running the demo
 
 1.  Run vault agent
 
@@ -148,7 +148,7 @@ Future versions of this might include:
 1. If your use case does not need a token to interact with Vault, now would be a good time to remove the `sink` stanza from the agent-demo.hcl file.
    Note: A sink file or listener must be enabled with auto_auth. This requirement will soon be removed, see https://github.com/hashicorp/vault/issues/7988 and https://github.com/hashicorp/vault/tree/template-sinkless
 
-### Use Vault to generate a PKI certificate and save to a file
+## Use Vault to generate a PKI certificate and save to a file
 
 1. Setup [PKI secrets engine](https://www.vaultproject.io/docs/secrets/pki)
    ```language
