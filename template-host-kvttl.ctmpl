@@ -1,0 +1,11 @@
+{{/* Read the secret at the path below */}}
+{{ with secret "kv1TTL/foo" }}
+ kv1: {{ .Data.kv1 }}
+ ttl: {{ .Data.ttl }}
+
+All raw metadata: {{ .Data }}
+
+{{ $hostname := (env "HOSTNAME") -}}
+Hostname env var: {{ $hostname}}
+
+{{ end }}

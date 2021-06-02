@@ -1,0 +1,17 @@
+Below is all the data provided for the certificate. It can be formatted with Consul template language,
+or, the file can be parsed by a follow-on command as referenced here: https://www.vaultproject.io/docs/agent/template#command
+{{ timestamp "unix" }}
+{{ with secret "/pki-agent/issue/dev-dot-com" "common_name=dev.hashicorpdemo.com" "ttl=1h"}}
+Certificate: 
+{{ .Data.certificate }}
+
+Expiration (Unix timestamp): {{ .Data.expiration }}
+TTL (seconds): {{ subtract (timestamp "unix" | parseInt ) ((.Data.expiration | toJSON) | parseJSON) }}
+
+Issuing CA: {{ .Data.issuing_ca }}
+
+Private key: {{ .Data.private_key }}
+
+Private key type: {{ .Data.private_key_type }}
+Serial number: {{ .Data.serial_number }}
+{{ end }}
