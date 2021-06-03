@@ -11,9 +11,10 @@ Future versions of this might include:
 
 ### Prerequisites
 
-* Vault environment. This can be a single Vault instance or a cluster. 
-* This guide will get you started with a 3-node cluster running raft/integrated storage:
-    * https://github.com/hashicorp/vault-guides/tree/master/operations/raft-storage
+* Vault environment. This can be a single Vault instance or a cluster. You can run in [dev mode](https://www.vaultproject.io/docs/concepts/dev-server), too.
+* If you don't want to run Vault in dev mode, you can try these install helpers:
+  * This script will install Vault and do basic config: https://gist.github.com/mikegreen/c681b88ff1f6f21744c7512546bb8683
+  * This guide will get you started with a 3-node cluster running raft/integrated storage: https://github.com/hashicorp/vault-guides/tree/master/operations/raft-storage
 * Vault binary 1.3.x (or later, this guide was authored with 1.3.1) in path
 
 ### Environment Prep
