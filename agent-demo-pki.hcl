@@ -24,3 +24,10 @@ template {
   backup      = true
   error_on_missing_key = false
 }
+
+template {
+  source      = "template-pki-key.ctmpl"
+  destination = "render-pki.key"
+  backup      = false
+  error_on_missing_key = false
+}
