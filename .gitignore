@@ -36,3 +36,7 @@ secretid
 render.txt
 roleid
 sink_file.txt
+sink_file_wrapped_1.txt
+sink_file_unwrapped_2.txt
+render-pki.txt
+render-pki.key
